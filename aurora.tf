@@ -20,7 +20,7 @@ resource "aws_rds_cluster" "this" {
   //count = var.create_cluster ? 1 : 0
 
   //global_cluster_identifier = var.global_cluster_identifier
-  cluster_identifier        = var.cluster_name
+  cluster_identifier = var.cluster_name
   //replication_source_identifier       = var.replication_source_identifier
   //source_region                       = var.source_region
   engine         = var.engine
@@ -38,9 +38,9 @@ resource "aws_rds_cluster" "this" {
   //backup_retention_period             = var.backup_retention_period
   //preferred_backup_window             = var.preferred_backup_window
   //preferred_maintenance_window        = var.preferred_maintenance_window
-  port                                = 5432 #local.port
-  db_subnet_group_name = aws_db_subnet_group.private.name
-  vpc_security_group_ids              = [aws_security_group.aurora-application-access.id]
+  port                   = 5432 #local.port
+  db_subnet_group_name   = aws_db_subnet_group.private.name
+  vpc_security_group_ids = [aws_security_group.aurora-application-access.id]
   //snapshot_identifier                 = var.snapshot_identifier
   //storage_encrypted                   = var.storage_encrypted
   //apply_immediately                   = var.apply_immediately

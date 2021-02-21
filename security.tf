@@ -10,20 +10,20 @@
 */
 
 resource "aws_security_group" "aurora-application-access" {
-  
+
   name        = "aurora-application-access-sg"
   description = "For Aurora application access."
   vpc_id      = module.aurora-vpc.id
-  
+
   tags = {
     Name = "aurora-application-access-sg"
   }
-  
+
 }
 
 resource "aws_security_group_rule" "aurora-allow_access" {
 
-  security_group_id        = aws_security_group.aurora-application-access.id
+  security_group_id = aws_security_group.aurora-application-access.id
 
   type                     = "ingress"
   from_port                = 5432
