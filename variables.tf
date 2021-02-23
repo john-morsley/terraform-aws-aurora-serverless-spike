@@ -8,6 +8,16 @@ __      __        _       _     _
     
 */
 
+variable "allow_major_version_upgrade" {
+  description = ""
+  type        = bool
+  default     = false
+}
+
+variable "apply_immediately" {
+  description = ""
+}
+
 variable "bastion_name" {
   description = "The name for the bastion host."
   type        = string
@@ -38,6 +48,13 @@ variable "deletion_protection" {
   default = false
 }
 
+// Only valid when using 'serverless'
+variable "enable_http_endpoint" {
+  description = ""
+  type        = bool
+  default     = false
+}
+
 variable "engine" {
   description = "Aurora database engine type. Valid values: aurora | aurora-mysql | aurora-postgresql"
   type        = string
@@ -46,11 +63,11 @@ variable "engine" {
 
 // Please refer to the following article when using serverless: 
 // https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
-variable "engine_mode" {
-  description = "Aurora database engine mode. Valid values:  multimaster | parallelquery | provisioned | serverless"
-  type        = string
-  default     = "serverless"
-}
+//variable "engine_mode" {
+//  description = "Aurora database engine mode. Valid values:  multimaster | parallelquery | provisioned | serverless"
+//  type        = string
+//  default     = "serverless"
+//}
 
 variable "engine_version" {
   description = "Aurora database engine version."
@@ -95,6 +112,14 @@ variable "scaling_configuration" {
 variable "skip_final_snapshot" {
   type    = bool
   default = true
+}
+
+//storage_encrypted = true
+
+variable "storage_encrypted" {
+  description = "Specifies whether the DB cluster is encrypted."
+  type        = bool
+  default     = true
 }
 
 variable "tags" {

@@ -21,14 +21,24 @@ resource "aws_rds_cluster" "this" {
 
   //global_cluster_identifier = var.global_cluster_identifier
   cluster_identifier = var.cluster_name
+  
   //replication_source_identifier       = var.replication_source_identifier
   //source_region                       = var.source_region
-  engine         = var.engine
-  engine_mode    = var.engine_mode
-  engine_version = var.engine_version
-  //allow_major_version_upgrade         = var.allow_major_version_upgrade
-  //enable_http_endpoint                = var.enable_http_endpoint
-  //kms_key_id                          = var.kms_key_id
+  engine                      = var.engine
+  engine_mode                 = local.engine_mode
+  engine_version              = var.engine_version
+  
+  availability_zones = data.aws_availability_zones.available
+  
+  apply_immediately           = var.apply_immediately
+  allow_major_version_upgrade = var.allow_major_version_upgrade
+  
+  
+  # Serverless only...
+  enable_http_endpoint        = var.enable_http_endpoint
+  storage_encrypted = var.storage_encrypted
+  
+
   //database_name                       = var.database_name
   master_username = var.master_username
   master_password = random_password.master_password.result
@@ -42,7 +52,9 @@ resource "aws_rds_cluster" "this" {
   db_subnet_group_name   = aws_db_subnet_group.private.name
   vpc_security_group_ids = [aws_security_group.aurora-application-access.id]
   //snapshot_identifier                 = var.snapshot_identifier
-  //storage_encrypted                   = var.storage_encrypted
+  
+  //kms_key_id                          = var.kms_key_id
+
   //apply_immediately                   = var.apply_immediately
   //db_cluster_parameter_group_name     = var.db_cluster_parameter_group_name
   //iam_database_authentication_enabled = var.iam_database_authentication_enabled
@@ -52,6 +64,13 @@ resource "aws_rds_cluster" "this" {
 
   //enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
+
+   
+  
+  
+  
+  
+  
   # Only required when 'engine_mode' is 'serverless'.
   dynamic "scaling_configuration" {
     for_each = var.scaling_configuration[*]

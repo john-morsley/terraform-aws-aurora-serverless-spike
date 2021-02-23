@@ -20,8 +20,12 @@ output "master_username" {
   value = var.master_username
 }
 
-output "aurora_server_endpoint" {
+output "aurora_endpoint" {
   value = aws_rds_cluster.this.endpoint
+}
+
+output "aurora_reader_endpoint" {
+  value = aws_rds_cluster.this.reader_endpoint
 }
 
 output "aurora_server_port" {
