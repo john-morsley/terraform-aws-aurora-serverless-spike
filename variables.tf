@@ -8,6 +8,22 @@ __      __        _       _     _
     
 */
 
+########################################################################################################################
+# GENERAL
+########################################################################################################################
+
+variable "tags" {
+  type = map(string)
+  default = {
+    "Created By" = "Terraform",
+    "Spike"      = "Aurora Serverless"
+  }
+}
+
+########################################################################################################################
+# AURORA
+########################################################################################################################
+
 variable "allow_major_version_upgrade" {
   description = ""
   type        = bool
@@ -18,28 +34,8 @@ variable "apply_immediately" {
   description = ""
 }
 
-variable "bastion_name" {
-  description = "The name for the bastion host."
-  type        = string
-}
-
-variable "bastion_user" {
-  type = string
-}
-
-variable "bastion_instance_type" {
-  type = string
-}
-
 variable "cluster_name" {
   description = "The name for this Aurora cluster."
-  type        = string
-}
-
-// Refer to:
-// https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance
-variable "database_instance_class" {
-  description = "The instance class to usee."
   type        = string
 }
 
@@ -75,21 +71,10 @@ variable "engine_version" {
   default     = null
 }
 
-
 variable "master_username" {
   description = "Master DB username."
   type        = string
   default     = "master"
-}
-
-variable "private_subnet_cidrs" {
-  type    = list(string)
-  default = []
-}
-
-variable "public_subnet_cidrs" {
-  type    = list(string)
-  default = []
 }
 
 variable "scaling_configuration" {
@@ -122,12 +107,35 @@ variable "storage_encrypted" {
   default     = true
 }
 
-variable "tags" {
-  type = map(string)
-  default = {
-    "Created By" = "Terraform",
-    "Spike"      = "Aurora"
-  }
+########################################################################################################################
+# BASTION
+########################################################################################################################
+
+variable "bastion_instance_type" {
+  type = string
+}
+
+variable "bastion_name" {
+  description = "The name for the bastion host."
+  type        = string
+}
+
+variable "bastion_user" {
+  type = string
+}
+
+########################################################################################################################
+# VPC
+########################################################################################################################
+
+variable "private_subnet_cidrs" {
+  type    = list(string)
+  default = []
+}
+
+variable "public_subnet_cidrs" {
+  type    = list(string)
+  default = []
 }
 
 variable "vpc_cidr" {

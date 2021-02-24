@@ -8,9 +8,9 @@
                  | |                  
                  |_|                */
 
-output "availability_zones" {
-  value = data.aws_availability_zones.available
-}
+//output "availability_zones" {
+//  value = data.aws_availability_zones.available
+//}
 
 output "master_password" {
   value = random_password.master_password.result
@@ -22,10 +22,6 @@ output "master_username" {
 
 output "aurora_endpoint" {
   value = aws_rds_cluster.this.endpoint
-}
-
-output "aurora_reader_endpoint" {
-  value = aws_rds_cluster.this.reader_endpoint
 }
 
 output "aurora_server_port" {

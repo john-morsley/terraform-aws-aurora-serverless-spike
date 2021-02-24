@@ -17,9 +17,6 @@ resource "aws_db_subnet_group" "private" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster
 resource "aws_rds_cluster" "this" {
 
-  //count = var.create_cluster ? 1 : 0
-
-  //global_cluster_identifier = var.global_cluster_identifier
   cluster_identifier = var.cluster_name
   
   //replication_source_identifier       = var.replication_source_identifier
@@ -28,15 +25,13 @@ resource "aws_rds_cluster" "this" {
   engine_mode                 = local.engine_mode
   engine_version              = var.engine_version
   
-  availability_zones = data.aws_availability_zones.available
-  
   apply_immediately           = var.apply_immediately
   allow_major_version_upgrade = var.allow_major_version_upgrade
   
   
   # Serverless only...
   enable_http_endpoint        = var.enable_http_endpoint
-  storage_encrypted = var.storage_encrypted
+  //storage_encrypted = var.storage_encrypted
   
 
   //database_name                       = var.database_name
@@ -45,7 +40,7 @@ resource "aws_rds_cluster" "this" {
   //final_snapshot_identifier           = "${var.final_snapshot_identifier_prefix}-${var.name}-${element(concat(random_id.snapshot_identifier.*.hex, [""]), 0)}"
   skip_final_snapshot = var.skip_final_snapshot
   deletion_protection = var.deletion_protection
-  //backup_retention_period             = var.backup_retention_period
+  backup_retention_period             = var.backup_retention_period
   //preferred_backup_window             = var.preferred_backup_window
   //preferred_maintenance_window        = var.preferred_maintenance_window
   port                   = 5432 #local.port

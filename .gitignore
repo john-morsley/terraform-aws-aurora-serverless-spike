@@ -31,4 +31,9 @@ override.tf.json
 # JetBrains Rider
 .idea/
 
-*/keys/
+*/keys/*
+
+*/shared-scipts*/*
+keys/
+
+shared-scripts-actively-healthy-sturgeon/
